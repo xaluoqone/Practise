@@ -1,4 +1,4 @@
-package com.xaluoqone.practise.circle
+package com.xaluoqone.practise.biorhythm
 
 import android.content.Context
 import android.util.AttributeSet

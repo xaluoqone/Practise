@@ -4,14 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/biorhythm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:text="@string/biorhythm"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".biorhythm.BiorhythmActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
