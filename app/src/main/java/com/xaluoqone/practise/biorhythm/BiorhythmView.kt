@@ -8,9 +8,9 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.graphics.toColorInt
 import com.xaluoqone.practise.ex.dp
-import com.xaluoqone.practise.getValue
-import com.xaluoqone.practise.setValue
-import com.xaluoqone.practise.viewPropertyOf
+import com.xaluoqone.practise.widget.getValue
+import com.xaluoqone.practise.widget.setValue
+import com.xaluoqone.practise.widget.viewStateOf
 import kotlin.math.*
 
 class BiorhythmView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
@@ -18,8 +18,8 @@ class BiorhythmView(context: Context, attrs: AttributeSet? = null) : View(contex
     private val path = Path()
     private val region = Region()
     private val sizeRegion = Region()
-    private var circleRadius by viewPropertyOf(0f)
-    private var circleWidth by viewPropertyOf(42.dp)
+    private var circleRadius by viewStateOf(0f)
+    private var circleWidth by viewStateOf(42.dp)
     private val nodeRadius = 16.dp
     private val timeNodes = mutableListOf<TimeNode>()
     private lateinit var currentNode: TimeNode
