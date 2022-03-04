@@ -16,3 +16,17 @@ private fun Context.newLinearLayout(scope: LinearLayoutCompat.() -> Unit) =
     LinearLayoutCompat(this).apply {
         scope()
     }
+
+fun LinearLayoutCompat.layoutParams(
+    width: Int = wrap,
+    height: Int = wrap,
+    config: LinearLayoutCompat.LayoutParams.() -> Unit
+) = LinearLayoutCompat.LayoutParams(width, height).apply {
+    config()
+}
+
+val LinearLayoutCompat.vertical: Int
+    get() = LinearLayoutCompat.VERTICAL
+
+val LinearLayoutCompat.horizontal: Int
+    get() = LinearLayoutCompat.HORIZONTAL

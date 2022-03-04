@@ -2,4 +2,5 @@
     <string name="app_name">Practise</string>
     <string name="biorhythm">Biorhythm</string>
     <string name="add_node">add node</string>
+    <string name="exo_player">Exo Player</string>
 </resources>
