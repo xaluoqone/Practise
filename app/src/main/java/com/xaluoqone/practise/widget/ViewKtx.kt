@@ -4,12 +4,14 @@ import android.view.ViewGroup
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 
-fun <T : ViewGroup> T.button(scope: MaterialButton.() -> Unit) =
+context(ViewGroup)
+fun button(scope: MaterialButton.() -> Unit) =
     addView(MaterialButton(context).apply {
         scope()
     })
 
-fun <T : ViewGroup> T.text(scope: MaterialTextView.() -> Unit) =
+context(ViewGroup)
+fun text(scope: MaterialTextView.() -> Unit) =
     addView(MaterialTextView(context).apply {
         scope()
     })

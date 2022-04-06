@@ -18,7 +18,7 @@ class ExoPlayerActivity : AppCompatActivity() {
             linear {
                 orientation = vertical
                 addView(StyledPlayerView(this@ExoPlayerActivity).apply {
-                    layoutParams = layoutParams {
+                    layoutParams {
                         width = match
                         height = wrap
                     }

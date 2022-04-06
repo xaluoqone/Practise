@@ -15,7 +15,7 @@ class BiorhythmActivity : AppCompatActivity() {
             linear {
                 orientation = vertical
                 val biorhythmView = BiorhythmView(this@BiorhythmActivity).apply {
-                    layoutParams = layoutParams {
+                    layoutParams {
                         width = match
                         setMargins(30.dpi)
                     }
@@ -23,7 +23,7 @@ class BiorhythmActivity : AppCompatActivity() {
                 addView(biorhythmView)
                 button {
                     text = getString(R.string.add_node)
-                    layoutParams = layoutParams {
+                    layoutParams {
                         width = match
                         marginStart = 6.dpi
                         marginEnd = 6.dpi

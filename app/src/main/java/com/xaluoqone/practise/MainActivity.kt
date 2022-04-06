@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
                 orientation = vertical
                 button {
                     text = getString(R.string.biorhythm)
-                    layoutParams = layoutParams {
+                    layoutParams {
                         width = match
                         marginStart = 6.dpi
                         marginEnd = 6.dpi
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
                 button {
                     text = getString(R.string.exo_player)
-                    layoutParams = layoutParams {
+                    layoutParams {
                         width = match
                         marginStart = 6.dpi
                         marginEnd = 6.dpi
