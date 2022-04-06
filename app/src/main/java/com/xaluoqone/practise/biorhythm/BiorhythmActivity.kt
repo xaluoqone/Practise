@@ -2,15 +2,22 @@ package com.xaluoqone.practise.biorhythm
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.FrameLayout
 import androidx.core.view.setMargins
 import com.xaluoqone.practise.R
+import com.xaluoqone.practise.ex.applyStatusBarPadding
 import com.xaluoqone.practise.ex.dpi
+import com.xaluoqone.practise.ex.setStatusBarTextColorIsLight
+import com.xaluoqone.practise.ex.setStatusBarTransparent
 import com.xaluoqone.practise.widget.*
 
 class BiorhythmActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setStatusBarTransparent()
+        setStatusBarTextColorIsLight(true)
+        findViewById<FrameLayout>(android.R.id.content).applyStatusBarPadding()
         setContentView(
             linear {
                 orientation = vertical
