@@ -2,6 +2,7 @@ package com.xaluoqone.practise.widget
 
 import android.app.Activity
 import android.content.Context
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.fragment.app.Fragment
@@ -17,16 +18,21 @@ private fun Context.newLinearLayout(scope: LinearLayoutCompat.() -> Unit) =
         scope()
     }
 
-fun LinearLayoutCompat.layoutParams(
+context(LinearLayoutCompat)
+fun View.layoutParams(
     width: Int = wrap,
     height: Int = wrap,
     config: LinearLayoutCompat.LayoutParams.() -> Unit
-) = LinearLayoutCompat.LayoutParams(width, height).apply {
-    config()
+) {
+    layoutParams = LinearLayoutCompat.LayoutParams(width, height).apply {
+        config()
+    }
 }
 
-val LinearLayoutCompat.vertical: Int
+context(LinearLayoutCompat)
+val vertical: Int
     get() = LinearLayoutCompat.VERTICAL
 
-val LinearLayoutCompat.horizontal: Int
+context(LinearLayoutCompat)
+val horizontal: Int
     get() = LinearLayoutCompat.HORIZONTAL

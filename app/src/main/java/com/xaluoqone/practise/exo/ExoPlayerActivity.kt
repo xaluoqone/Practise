@@ -2,31 +2,44 @@ package com.xaluoqone.practise.exo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import com.xaluoqone.practise.widget.linear
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.ui.StyledPlayerView
+import com.xaluoqone.practise.ex.setStatusBarTextColorIsLight
+import com.xaluoqone.practise.ex.setStatusBarTransparent
+import com.xaluoqone.practise.widget.*
 
 class ExoPlayerActivity : AppCompatActivity() {
+    private val player by lazy {
+        ExoPlayer.Builder(this).build()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setStatusBarTransparent()
+        setStatusBarTextColorIsLight(false)
         setContentView(
             linear {
-
+                orientation = vertical
+                addView(StyledPlayerView(this@ExoPlayerActivity).apply {
+                    layoutParams {
+                        width = match
+                        height = wrap
+                    }
+                    player = this@ExoPlayerActivity.player
+                })
             }
         )
 
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        val mediaItem = MediaItem.fromUri("https://xaluoqone.com/files/video/benxi.mp4")
 
-        ViewCompat.getWindowInsetsController(window.decorView)?.apply {
-            isAppearanceLightStatusBars = true
-        }
+        player.setMediaItem(mediaItem)
+        player.prepare()
+        player.play()
+    }
 
-        window.decorView.setOnApplyWindowInsetsListener { _, windowInsets ->
-            val insets = WindowInsetsCompat.toWindowInsetsCompat(windowInsets)
-            val statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars())
-            window.decorView.setPadding(0, statusBarInsets.top, 0, 0)
-            windowInsets
-        }
+    override fun onDestroy() {
+        super.onDestroy()
+        player.release()
     }
 }
