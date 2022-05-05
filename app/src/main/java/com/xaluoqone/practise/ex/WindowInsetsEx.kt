@@ -8,6 +8,7 @@ import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 
 data class InitialPadding(
     val left: Int,
@@ -60,18 +61,19 @@ fun View.requestApplyInsetsWhenAttached() {
 }
 
 fun Activity.configSystemBar(config: SystemBarConfig.() -> Unit) {
-    val (decorFitsSystemWindows,
+    val (
+        decorFitsSystemWindows,
         statusBarColor,
         navigationBarColor,
         statusBarBlackFont,
         navigationBarBlackIcon,
         gestureNavigationTransparent,
-        navigationTransparent
+        navigationTransparent,
+        applyStatusBarView,
+        applyNavigationBarView
     ) = SystemBarConfig().apply(config)
-
     WindowCompat.setDecorFitsSystemWindows(window, decorFitsSystemWindows)
     window.statusBarColor = statusBarColor
-    window.navigationBarColor = navigationBarColor
     WindowCompat.getInsetsController(window, window.decorView)?.run {
         isAppearanceLightStatusBars = statusBarBlackFont
         isAppearanceLightNavigationBars = navigationBarBlackIcon
@@ -82,6 +84,7 @@ fun Activity.configSystemBar(config: SystemBarConfig.() -> Unit) {
         val isGestureNavigation = isGestureNavigation(navigationWindowInsets)
         if (!isGestureNavigation) {
             val newNavigationWindowInsets = if (navigationTransparent) {
+                window.navigationBarColor = Color.TRANSPARENT
                 WindowInsetsCompat.Builder()
                     .setInsets(
                         WindowInsetsCompat.Type.navigationBars(), Insets.of(
@@ -90,11 +93,13 @@ fun Activity.configSystemBar(config: SystemBarConfig.() -> Unit) {
                         )
                     ).build()
             } else {
+                window.navigationBarColor = navigationBarColor
                 insets
             }
             ViewCompat.onApplyWindowInsets(window.decorView, newNavigationWindowInsets)
         } else if (isGestureNavigation) {
             val newNavigationWindowInsets = if (gestureNavigationTransparent) {
+                window.navigationBarColor = Color.TRANSPARENT
                 WindowInsetsCompat.Builder()
                     .setInsets(
                         WindowInsetsCompat.Type.navigationBars(), Insets.of(
@@ -103,10 +108,19 @@ fun Activity.configSystemBar(config: SystemBarConfig.() -> Unit) {
                         )
                     ).build()
             } else {
+                window.navigationBarColor = navigationBarColor
                 insets
             }
             ViewCompat.onApplyWindowInsets(window.decorView, newNavigationWindowInsets)
         }
+    }
+    applyStatusBarView?.doOnApplyWindowInsets { insets, _, _ ->
+        val statusWindowInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars())
+        applyStatusBarView.updatePadding(top = statusWindowInsets.top)
+    }
+    applyNavigationBarView?.doOnApplyWindowInsets { insets, _, _ ->
+        val navigationWindowInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+        applyNavigationBarView.updatePadding(bottom = navigationWindowInsets.bottom)
     }
 }
 
@@ -118,11 +132,13 @@ fun Activity.isGestureNavigation(navigationBarInsets: Insets): Boolean {
 class SystemBarConfig {
     var decorFitsSystemWindows = false
     var statusBarColor = Color.TRANSPARENT
-    var navigationBarColor = Color.RED
+    var navigationBarColor = Color.TRANSPARENT
     var statusBarBlackFont = false
     var navigationBarBlackIcon = false
     var gestureNavigationTransparent = true
     var navigationTransparent = false
+    var applyStatusBarView: View? = null
+    var applyNavigationBarView: View? = null
 
     operator fun component1() = decorFitsSystemWindows
     operator fun component2() = statusBarColor
@@ -131,4 +147,6 @@ class SystemBarConfig {
     operator fun component5() = navigationBarBlackIcon
     operator fun component6() = gestureNavigationTransparent
     operator fun component7() = navigationTransparent
+    operator fun component8() = applyStatusBarView
+    operator fun component9() = applyNavigationBarView
 }
