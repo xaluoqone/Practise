@@ -2,6 +2,8 @@ package com.xaluoqone.practise.exo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.PARENT_ID
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.ui.StyledPlayerView
@@ -15,17 +17,30 @@ class ExoPlayerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        configSystemBar {  }
+        configSystemBar { }
         setContentView(
-            linear {
-                orientation = vertical
-                addView(StyledPlayerView(this@ExoPlayerActivity).apply {
+            constraint {
+                val playerView = playerView()
+                val fullScreen = button {
+                    text = "全屏"
                     layoutParams {
-                        width = match
+                        width = wrap
                         height = wrap
+                        bottomToBottom = playerView.id
+                        endToEnd = playerView.id
                     }
-                    player = this@ExoPlayerActivity.player
-                })
+
+                    setOnClickListener {
+                        requestedOrientation =
+                            if (requestedOrientation == android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+                                android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                            } else {
+                                android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                            }
+                    }
+                }
+                addView(playerView)
+                addView(fullScreen)
             }
         )
 
@@ -34,6 +49,18 @@ class ExoPlayerActivity : AppCompatActivity() {
         player.setMediaItem(mediaItem)
         player.prepare()
         player.play()
+    }
+
+    context (ConstraintLayout)private fun playerView(): StyledPlayerView {
+        return StyledPlayerView(this@ExoPlayerActivity).apply {
+            id = System.currentTimeMillis().toInt()
+            layoutParams {
+                width = match
+                topToTop = PARENT_ID
+                dimensionRatio = "16:9"
+            }
+            player = this@ExoPlayerActivity.player
+        }
     }
 
     override fun onDestroy() {
