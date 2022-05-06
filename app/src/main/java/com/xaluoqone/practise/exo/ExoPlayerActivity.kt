@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.ui.StyledPlayerView
-import com.xaluoqone.practise.ex.setStatusBarTextColorIsLight
-import com.xaluoqone.practise.ex.setStatusBarTransparent
+import com.xaluoqone.practise.ex.configSystemBar
 import com.xaluoqone.practise.widget.*
 
 class ExoPlayerActivity : AppCompatActivity() {
@@ -16,8 +15,7 @@ class ExoPlayerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStatusBarTransparent()
-        setStatusBarTextColorIsLight(false)
+        configSystemBar {  }
         setContentView(
             linear {
                 orientation = vertical
