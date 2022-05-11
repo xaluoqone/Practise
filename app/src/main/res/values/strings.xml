@@ -4,4 +4,5 @@
     <string name="add_node">add node</string>
     <string name="exo_player">Exo Player</string>
     <string name="window_insets">WindowInsets</string>
+    <string name="data_store">DataStore</string>
 </resources>

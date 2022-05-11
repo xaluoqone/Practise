@@ -24,18 +24,19 @@ class WindowInsetsActivity : AppCompatActivity() {
                 updatePadding(bottom = navigationBarInsets.bottom)
             }
 
-            text {
+            addView(text {
                 text = "WindowInsetsActivity"
                 setBackgroundColor(0xffffffff.toInt())
                 doOnApplyWindowInsets { insets, _, _ ->
                     val statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars())
                     updatePadding(top = statusBarInsets.top)
                 }
-            }
-            text { text = "WindowInsetsActivity" }
-            text { text = "WindowInsetsActivity" }
-            text { text = "WindowInsetsActivity" }
-            text { text = "WindowInsetsActivity" }
+            })
+            addView(text { text = "WindowInsetsActivity" })
+            addView(text { text = "WindowInsetsActivity" })
+            addView(text { text = "WindowInsetsActivity" })
+            addView(text { text = "WindowInsetsActivity" })
+            addView(text { text = "WindowInsetsActivity" })
         }
 
         setContentView(

@@ -31,7 +31,7 @@ class BiorhythmActivity : AppCompatActivity() {
                     }
                 }
                 addView(biorhythmView)
-                button {
+                addView(button {
                     text = getString(R.string.add_node)
                     layoutParams {
                         width = match
@@ -42,7 +42,7 @@ class BiorhythmActivity : AppCompatActivity() {
                     setOnClickListener {
                         biorhythmView.addTimeNode()
                     }
-                }
+                })
             }
         )
     }

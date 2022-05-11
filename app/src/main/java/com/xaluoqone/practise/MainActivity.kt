@@ -7,6 +7,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import com.xaluoqone.practise.biorhythm.BiorhythmActivity
+import com.xaluoqone.practise.data.DataStoreActivity
 import com.xaluoqone.practise.ex.*
 import com.xaluoqone.practise.exo.ExoPlayerActivity
 import com.xaluoqone.practise.insets.WindowInsetsActivity
@@ -26,15 +27,18 @@ class MainActivity : AppCompatActivity() {
                     val statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars())
                     updatePadding(top = statusBarInsets.top)
                 }
-                button(getString(R.string.biorhythm)) {
+                addView(button(getString(R.string.biorhythm)) {
                     startActivity(Intent(this@MainActivity, BiorhythmActivity::class.java))
-                }
-                button(getString(R.string.exo_player)) {
+                })
+                addView(button(getString(R.string.exo_player)) {
                     startActivity(Intent(this@MainActivity, ExoPlayerActivity::class.java))
-                }
-                button(getString(R.string.window_insets)) {
+                })
+                addView(button(getString(R.string.window_insets)) {
                     startActivity(Intent(this@MainActivity, WindowInsetsActivity::class.java))
-                }
+                })
+                addView(button(getString(R.string.data_store)) {
+                    startActivity(Intent(this@MainActivity, DataStoreActivity::class.java))
+                })
             }
         )
     }
