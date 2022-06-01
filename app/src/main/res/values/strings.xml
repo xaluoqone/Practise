@@ -5,4 +5,7 @@
     <string name="exo_player">Exo Player</string>
     <string name="window_insets">WindowInsets</string>
     <string name="data_store">DataStore</string>
+    <string name="flow_event_bus">FlowEventBus</string>
+    <string name="send_flow_event">发送普通事件</string>
+    <string name="send_broadcast_flow_event">以广播形式发送事件</string>
 </resources>
