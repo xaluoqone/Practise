@@ -30,7 +30,8 @@ class BiorhythmActivity : AppCompatActivity() {
                         setMargins(30.dpi)
                     }
                 }
-                val addNode = button {
+                addView(biorhythmView)
+                addView(button {
                     text = getString(R.string.add_node)
                     layoutParams {
                         width = match
@@ -41,9 +42,7 @@ class BiorhythmActivity : AppCompatActivity() {
                     setOnClickListener {
                         biorhythmView.addTimeNode()
                     }
-                }
-                addView(biorhythmView)
-                addView(addNode)
+                })
             }
         )
     }

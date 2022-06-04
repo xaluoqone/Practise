@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".exo.ExoPlayerActivity" />
         <activity android:name=".insets.WindowInsetsActivity" />
+        <activity android:name=".data.DataStoreActivity" />
+        <activity android:name=".event.EventActivity" />
     </application>
 
 </manifest>
