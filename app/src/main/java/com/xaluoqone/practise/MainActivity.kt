@@ -10,6 +10,7 @@ import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
 import com.xaluoqone.practise.biorhythm.BiorhythmActivity
 import com.xaluoqone.practise.data.DataStoreActivity
+import com.xaluoqone.practise.database.DatabaseActivity
 import com.xaluoqone.practise.event.EventActivity
 import com.xaluoqone.practise.event.FlowEventBus
 import com.xaluoqone.practise.event.onBroadcast
@@ -47,6 +48,9 @@ class MainActivity : AppCompatActivity() {
                 })
                 addView(button(getString(R.string.flow_event_bus)) {
                     startActivity(Intent(this@MainActivity, EventActivity::class.java))
+                })
+                addView(button(getString(R.string.database)) {
+                    startActivity(Intent(this@MainActivity, DatabaseActivity::class.java))
                 })
             }
         )

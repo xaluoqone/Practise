@@ -5,6 +5,7 @@ import android.app.Application
 class App : Application() {
     companion object {
         lateinit var instance: App
+        const val isDebug = true
     }
 
     override fun onCreate() {

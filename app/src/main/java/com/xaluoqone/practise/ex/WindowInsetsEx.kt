@@ -74,7 +74,7 @@ fun Activity.configSystemBar(config: SystemBarConfig.() -> Unit) {
     ) = SystemBarConfig().apply(config)
     WindowCompat.setDecorFitsSystemWindows(window, decorFitsSystemWindows)
     window.statusBarColor = statusBarColor
-    WindowCompat.getInsetsController(window, window.decorView)?.run {
+    WindowCompat.getInsetsController(window, window.decorView).run {
         isAppearanceLightStatusBars = statusBarBlackFont
         isAppearanceLightNavigationBars = navigationBarBlackIcon
     }
