@@ -1,13 +1,15 @@
 package com.xaluoqone.practise.biorhythm
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.setMargins
 import androidx.core.view.updatePadding
 import com.xaluoqone.practise.R
-import com.xaluoqone.practise.ex.*
+import com.xaluoqone.practise.ex.configSystemBar
+import com.xaluoqone.practise.ex.doOnApplyWindowInsets
+import com.xaluoqone.practise.ex.dpi
 import com.xaluoqone.practise.widget.*
 
 class BiorhythmActivity : AppCompatActivity() {
@@ -25,7 +27,7 @@ class BiorhythmActivity : AppCompatActivity() {
                     updatePadding(top = statusBarInsets.top)
                 }
                 val biorhythmView = BiorhythmView(this@BiorhythmActivity).apply {
-                    layoutParams {
+                    layoutParams<LinearLayoutCompat.LayoutParams> {
                         width = match
                         setMargins(30.dpi)
                     }
@@ -33,7 +35,7 @@ class BiorhythmActivity : AppCompatActivity() {
                 addView(biorhythmView)
                 addView(button {
                     text = getString(R.string.add_node)
-                    layoutParams {
+                    layoutParams<LinearLayoutCompat.LayoutParams> {
                         width = match
                         marginStart = 6.dpi
                         marginEnd = 6.dpi

@@ -23,7 +23,7 @@ class ExoPlayerActivity : AppCompatActivity() {
                 val playerView = playerView()
                 val fullScreen = button {
                     text = "全屏"
-                    layoutParams {
+                    layoutParams<ConstraintLayout.LayoutParams> {
                         width = wrap
                         height = wrap
                         bottomToBottom = playerView.id
@@ -54,7 +54,7 @@ class ExoPlayerActivity : AppCompatActivity() {
     context (ConstraintLayout)private fun playerView(): StyledPlayerView {
         return StyledPlayerView(this@ExoPlayerActivity).apply {
             id = System.currentTimeMillis().toInt()
-            layoutParams {
+            layoutParams<ConstraintLayout.LayoutParams> {
                 width = match
                 topToTop = PARENT_ID
                 dimensionRatio = "16:9"

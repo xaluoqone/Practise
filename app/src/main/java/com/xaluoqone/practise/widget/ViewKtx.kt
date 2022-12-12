@@ -11,10 +11,11 @@ fun button(scope: MaterialButton.() -> Unit) =
     }
 
 context(ViewGroup)
-fun text(scope: MaterialTextView.() -> Unit) =
-    MaterialTextView(context).apply {
-        scope()
-    }
+fun text(
+    scope: MaterialTextView.() -> Unit
+) = MaterialTextView(context).apply {
+    scope()
+}
 
 const val match = ViewGroup.LayoutParams.MATCH_PARENT
 const val wrap = ViewGroup.LayoutParams.WRAP_CONTENT

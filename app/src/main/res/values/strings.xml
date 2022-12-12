@@ -11,4 +11,5 @@
     <string name="insert_test_info_list">添加TextInfo数据</string>
     <string name="delete_the_range_test_info">范围删除TestInfo数据</string>
     <string name="database">Database</string>
+    <string name="save_text">save text</string>
 </resources>

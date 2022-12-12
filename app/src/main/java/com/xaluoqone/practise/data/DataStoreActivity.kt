@@ -5,7 +5,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.lifecycle.lifecycleScope
+import com.xaluoqone.practise.R
 import com.xaluoqone.practise.ex.configSystemBar
 import com.xaluoqone.practise.ex.dpi
 import com.xaluoqone.practise.ex.launchAndRepeatWithViewLifecycle
@@ -36,9 +38,9 @@ class DataStoreActivity : AppCompatActivity() {
             orientation = vertical
             val text = text {}
             val button = button {
-                this.text = "save text"
+                this.text = getString(R.string.save_text)
 
-                layoutParams {
+                layoutParams<LinearLayoutCompat.LayoutParams> {
                     width = match
                     marginStart = 6.dpi
                     marginEnd = 6.dpi

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.fragment.app.Fragment
 
@@ -18,15 +19,14 @@ private fun Context.newLinearLayout(scope: LinearLayoutCompat.() -> Unit) =
         scope()
     }
 
-context(LinearLayoutCompat)
-fun View.layoutParams(
+inline fun <reified LP : LayoutParams> View.layoutParams(
     width: Int = wrap,
     height: Int = wrap,
-    config: LinearLayoutCompat.LayoutParams.() -> Unit
+    layoutParamsBlock: LP.() -> Unit,
 ) {
-    layoutParams = LinearLayoutCompat.LayoutParams(width, height).apply {
-        config()
-    }
+    val lp = LP::class.java.getConstructor(Int::class.java, Int::class.java).newInstance(width, height)
+    lp.layoutParamsBlock()
+    layoutParams = lp
 }
 
 context(LinearLayoutCompat)

@@ -76,10 +76,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     context(LinearLayoutCompat)
-            private fun button(text: String, onClick: () -> Unit) = button {
+    private fun button(text: String, onClick: () -> Unit) = button {
         this.text = text
-        layoutParams {
-            width = match
+        layoutParams<LinearLayoutCompat.LayoutParams>(width = match) {
             marginStart = 6.dpi
             marginEnd = 6.dpi
         }

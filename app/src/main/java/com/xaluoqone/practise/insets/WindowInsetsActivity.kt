@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
+import com.xaluoqone.practise.R
 import com.xaluoqone.practise.ex.configSystemBar
 import com.xaluoqone.practise.ex.doOnApplyWindowInsets
 import com.xaluoqone.practise.widget.linear
@@ -25,18 +26,18 @@ class WindowInsetsActivity : AppCompatActivity() {
             }
 
             addView(text {
-                text = "WindowInsetsActivity"
+                text = getString(R.string.window_insets)
                 setBackgroundColor(0xffffffff.toInt())
                 doOnApplyWindowInsets { insets, _, _ ->
                     val statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars())
                     updatePadding(top = statusBarInsets.top)
                 }
             })
-            addView(text { text = "WindowInsetsActivity" })
-            addView(text { text = "WindowInsetsActivity" })
-            addView(text { text = "WindowInsetsActivity" })
-            addView(text { text = "WindowInsetsActivity" })
-            addView(text { text = "WindowInsetsActivity" })
+            addView(text { text = getString(R.string.window_insets) })
+            addView(text { text = getString(R.string.window_insets) })
+            addView(text { text = getString(R.string.window_insets) })
+            addView(text { text = getString(R.string.window_insets) })
+            addView(text { text = getString(R.string.window_insets) })
         }
 
         setContentView(

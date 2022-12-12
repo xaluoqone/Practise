@@ -114,13 +114,21 @@ fun Activity.configSystemBar(config: SystemBarConfig.() -> Unit) {
             ViewCompat.onApplyWindowInsets(window.decorView, newNavigationWindowInsets)
         }
     }
-    applyStatusBarView?.doOnApplyWindowInsets { insets, _, _ ->
-        val statusWindowInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars())
-        applyStatusBarView.updatePadding(top = statusWindowInsets.top)
-    }
-    applyNavigationBarView?.doOnApplyWindowInsets { insets, _, _ ->
-        val navigationWindowInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
-        applyNavigationBarView.updatePadding(bottom = navigationWindowInsets.bottom)
+    if (applyStatusBarView != null && applyStatusBarView == applyNavigationBarView) {
+        applyStatusBarView.doOnApplyWindowInsets { insets, _, _ ->
+            val statusWindowInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars())
+            val navigationWindowInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            applyStatusBarView.updatePadding(top = statusWindowInsets.top, bottom = navigationWindowInsets.bottom)
+        }
+    } else {
+        applyStatusBarView?.doOnApplyWindowInsets { insets, _, _ ->
+            val statusWindowInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars())
+            applyStatusBarView.updatePadding(top = statusWindowInsets.top)
+        }
+        applyNavigationBarView?.doOnApplyWindowInsets { insets, _, _ ->
+            val navigationWindowInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            applyNavigationBarView.updatePadding(bottom = navigationWindowInsets.bottom)
+        }
     }
 }
 
