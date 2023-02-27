@@ -17,6 +17,7 @@ import com.xaluoqone.practise.event.onBroadcast
 import com.xaluoqone.practise.ex.*
 import com.xaluoqone.practise.exo.ExoPlayerActivity
 import com.xaluoqone.practise.insets.WindowInsetsActivity
+import com.xaluoqone.practise.recycler.RecyclerActivity
 import com.xaluoqone.practise.widget.*
 import kotlinx.coroutines.launch
 
@@ -51,6 +52,9 @@ class MainActivity : AppCompatActivity() {
                 })
                 addView(button(getString(R.string.database)) {
                     startActivity(Intent(this@MainActivity, DatabaseActivity::class.java))
+                })
+                addView(button(getString(R.string.recycler)) {
+                    startActivity(Intent(this@MainActivity, RecyclerActivity::class.java))
                 })
             }
         )

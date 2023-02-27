@@ -36,5 +36,8 @@
         <activity
             android:name=".database.DatabaseActivity"
             android:exported="true" />
+        <activity
+            android:name=".recycler.RecyclerActivity"
+            android:exported="true" />
     </application>
 </manifest>
