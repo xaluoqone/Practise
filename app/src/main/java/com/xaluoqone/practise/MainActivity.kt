@@ -1,9 +1,9 @@
 package com.xaluoqone.practise
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
@@ -14,7 +14,9 @@ import com.xaluoqone.practise.database.DatabaseActivity
 import com.xaluoqone.practise.event.EventActivity
 import com.xaluoqone.practise.event.FlowEventBus
 import com.xaluoqone.practise.event.onBroadcast
-import com.xaluoqone.practise.ex.*
+import com.xaluoqone.practise.ex.configSystemBar
+import com.xaluoqone.practise.ex.doOnApplyWindowInsets
+import com.xaluoqone.practise.ex.dpi
 import com.xaluoqone.practise.exo.ExoPlayerActivity
 import com.xaluoqone.practise.insets.WindowInsetsActivity
 import com.xaluoqone.practise.recycler.RecyclerActivity
@@ -56,10 +58,33 @@ class MainActivity : AppCompatActivity() {
                 addView(button(getString(R.string.recycler)) {
                     startActivity(Intent(this@MainActivity, RecyclerActivity::class.java))
                 })
+                addView(button(getString(R.string.start_port)) {
+                    getRootProcess()?.run {
+                        outputStream.bufferedWriter().use { output ->
+                            output.write("setprop service.adb.tcp.port 10000\n")
+                            output.flush()
+                            output.write("stop adbd\n")
+                            output.flush()
+                            output.write("start adbd\n")
+                            output.flush()
+                            output.write("exit\n")
+                            output.flush()
+                        }
+                        waitFor()
+                    }
+                })
             }
         )
 
         initObserver()
+    }
+
+    private fun getRootProcess(): Process? {
+        return try {
+            Runtime.getRuntime().exec("su")
+        } catch (_: Exception) {
+            null
+        }
     }
 
     private fun initObserver() {

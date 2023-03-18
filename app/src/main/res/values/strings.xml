@@ -13,4 +13,5 @@
     <string name="database">Database</string>
     <string name="recycler">Recycler</string>
     <string name="save_text">save text</string>
+    <string name="start_port">Start 10000 port</string>
 </resources>
