@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class TestInfo(
     @PrimaryKey
     val id: Long,
-    val data: String
+    val data: String,
+    val owner: String? = null
 )

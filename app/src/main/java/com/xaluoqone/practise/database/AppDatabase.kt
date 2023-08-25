@@ -1,5 +1,6 @@
 package com.xaluoqone.practise.database
 
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -11,8 +12,10 @@ import com.xaluoqone.practise.database.table.TestInfo
     entities = [
         TestInfo::class
     ],
-    version = 1,
-    exportSchema = false
+    version = 2,
+    autoMigrations = [
+        AutoMigration(from = 1, to = 2)
+    ]
 )
 abstract class AppDatabase : RoomDatabase() {
 

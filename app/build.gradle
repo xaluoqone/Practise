@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
 }
 
 android {
@@ -13,6 +13,10 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
+
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
     }
 
     buildTypes {
@@ -52,5 +56,5 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
     api "androidx.room:room-ktx:2.4.3"
-    kapt "androidx.room:room-compiler:2.4.3"
+    ksp "androidx.room:room-compiler:2.4.3"
 }
