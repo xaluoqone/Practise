@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
@@ -16,11 +15,13 @@ import com.xaluoqone.practise.event.FlowEventBus
 import com.xaluoqone.practise.event.onBroadcast
 import com.xaluoqone.practise.ex.configSystemBar
 import com.xaluoqone.practise.ex.doOnApplyWindowInsets
-import com.xaluoqone.practise.ex.dpi
 import com.xaluoqone.practise.exo.ExoPlayerActivity
 import com.xaluoqone.practise.insets.WindowInsetsActivity
+import com.xaluoqone.practise.proxy.ProxyActivity
 import com.xaluoqone.practise.recycler.RecyclerActivity
-import com.xaluoqone.practise.widget.*
+import com.xaluoqone.practise.widget.button
+import com.xaluoqone.practise.widget.linear
+import com.xaluoqone.practise.widget.vertical
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -73,6 +74,9 @@ class MainActivity : AppCompatActivity() {
                         waitFor()
                     }
                 })
+                addView(button(getString(R.string.proxy)) {
+                    startActivity(Intent(this@MainActivity, ProxyActivity::class.java))
+                })
             }
         )
 
@@ -101,19 +105,6 @@ class MainActivity : AppCompatActivity() {
             FlowEventBus.onEvent<String>("EVENT") {
                 Toast.makeText(this@MainActivity, "Main接收到消息：$it", Toast.LENGTH_SHORT).show()
             }
-        }
-    }
-
-    context(LinearLayoutCompat)
-    private fun button(text: String, onClick: () -> Unit) = button {
-        this.text = text
-        layoutParams<LinearLayoutCompat.LayoutParams>(width = match) {
-            marginStart = 6.dpi
-            marginEnd = 6.dpi
-        }
-
-        setOnClickListener {
-            onClick()
         }
     }
 }
