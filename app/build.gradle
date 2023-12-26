@@ -17,6 +17,14 @@ android {
         ksp {
             arg("room.schemaLocation", "$projectDir/schemas")
         }
+
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+                abiFilters "arm64-v8a"
+                arguments "-DANDROID_TOOLCHAIN=clang"
+            }
+        }
     }
 
     buildTypes {
@@ -34,6 +42,13 @@ android {
     kotlinOptions {
         jvmTarget = java_version
         freeCompilerArgs = ['-Xcontext-receivers']
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+            version "3.22.1"
+        }
     }
 }
 

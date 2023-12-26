@@ -42,5 +42,8 @@
         <activity
             android:name=".proxy.ProxyActivity"
             android:exported="true" />
+        <activity
+            android:name=".compress.CompressActivity"
+            android:exported="true" />
     </application>
 </manifest>
