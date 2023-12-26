@@ -10,6 +10,8 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
 class FlowEventBus2 private constructor(context: Context) {
     val flowEvents = FlowEvents()
@@ -56,13 +58,16 @@ interface Events
 
 class FlowEvents : Events {
     private val events = ArrayMap<String, MutableSharedFlow<Any>>()
+    private val mutex = Mutex()
 
     @Suppress("UNCHECKED_CAST")
-    operator fun <T> get(key: String): Flow<T> {
-        if (events[key] == null) {
-            events[key] = MutableSharedFlow()
+    suspend fun <T> get(key: String): Flow<T> {
+        return mutex.withLock {
+            if (events[key] == null) {
+                events[key] = MutableSharedFlow()
+            }
+            events[key] as Flow<T>
         }
-        return events[key] as Flow<T>
     }
 
     suspend fun <T : Any> set(key: String, value: T) {
@@ -72,12 +77,15 @@ class FlowEvents : Events {
 
 class BroadcastEvents(private val context: Context) : Events {
     private val events = ArrayMap<String, Flow<Intent?>>()
+    private val mutex = Mutex()
 
-    fun get(key: String): Flow<Intent?>? {
-        if (events[key] == null) {
-            events[key] = context.broadcastFlow(key)
+    suspend fun get(key: String): Flow<Intent?>? {
+        return mutex.withLock {
+            if (events[key] == null) {
+                events[key] = context.broadcastFlow(key)
+            }
+            events[key]
         }
-        return events[key]
     }
 
     operator fun set(key: String, bundle: Bundle) {
