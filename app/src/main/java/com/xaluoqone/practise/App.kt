@@ -1,6 +1,7 @@
 package com.xaluoqone.practise
 
 import android.app.Application
+import com.xaluoqone.practise.event.FlowEventBus2
 import com.xaluoqone.practise.ktx.loge
 
 class App : Application() {
@@ -12,6 +13,8 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+
+        FlowEventBus2.init(this)
 
         val defExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
 
