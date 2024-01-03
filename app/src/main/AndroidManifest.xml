@@ -49,5 +49,8 @@
         <activity
             android:name=".compress.CompressActivity"
             android:exported="true" />
+        <activity
+            android:name="com.xaluoqone.practise.compress.BitmapMemoryManagerActivity"
+            android:exported="true" />
     </application>
 </manifest>

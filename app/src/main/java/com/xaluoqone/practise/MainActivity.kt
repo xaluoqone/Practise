@@ -8,13 +8,12 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
 import com.xaluoqone.practise.biorhythm.BiorhythmActivity
+import com.xaluoqone.practise.compress.BitmapMemoryManagerActivity
 import com.xaluoqone.practise.compress.CompressActivity
 import com.xaluoqone.practise.data.DataStoreActivity
 import com.xaluoqone.practise.database.DatabaseActivity
 import com.xaluoqone.practise.event.EventActivity
-import com.xaluoqone.practise.event.FlowEventBus
 import com.xaluoqone.practise.event.FlowEventBus2
-import com.xaluoqone.practise.event.onBroadcast
 import com.xaluoqone.practise.ex.configSystemBar
 import com.xaluoqone.practise.ex.doOnApplyWindowInsets
 import com.xaluoqone.practise.exo.ExoPlayerActivity
@@ -82,6 +81,9 @@ class MainActivity : AppCompatActivity() {
                 addView(button(getString(R.string.compress)) {
                     startActivity(Intent(this@MainActivity, CompressActivity::class.java))
                 })
+                addView(button(getString(R.string.bitmap_memory_manage)) {
+                    startActivity(Intent(this@MainActivity, BitmapMemoryManagerActivity::class.java))
+                })
             }
         )
 
@@ -97,20 +99,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initObserver() {
-//        lifecycleScope.launch {
-//            onBroadcast(this@MainActivity, "EVENT_BROADCAST") {
-//                Toast.makeText(
-//                    this@MainActivity,
-//                    "Main接收到消息：${it.getStringExtra("test")}",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
-//        }
-//        lifecycleScope.launch {
-//            FlowEventBus.onEvent<String>("EVENT") {
-//                Toast.makeText(this@MainActivity, "Main接收到消息：$it", Toast.LENGTH_SHORT).show()
-//            }
-//        }
+        //        lifecycleScope.launch {
+        //            onBroadcast(this@MainActivity, "EVENT_BROADCAST") {
+        //                Toast.makeText(
+        //                    this@MainActivity,
+        //                    "Main接收到消息：${it.getStringExtra("test")}",
+        //                    Toast.LENGTH_SHORT
+        //                ).show()
+        //            }
+        //        }
+        //        lifecycleScope.launch {
+        //            FlowEventBus.onEvent<String>("EVENT") {
+        //                Toast.makeText(this@MainActivity, "Main接收到消息：$it", Toast.LENGTH_SHORT).show()
+        //            }
+        //        }
         lifecycleScope.launch {
             FlowEventBus2.onBroadcast("FLOW_EVENT_BROADCAST2") {
                 Toast.makeText(this@MainActivity, "Main接收到消息：${it?.getStringExtra("test")}", Toast.LENGTH_SHORT).show()
