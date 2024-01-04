@@ -3,7 +3,6 @@ package com.xaluoqone.practise.ktx
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import com.xaluoqone.practise.R
 
 /**
  * 获取压缩后的图片
@@ -12,11 +11,11 @@ import com.xaluoqone.practise.R
  * @param removeAlpha 是否去除透明度
  * @return 压缩后的图片
  */
-fun Context.getCompressBitmap(targetW: Int? = null, targetH: Int? = null, removeAlpha: Boolean = true): Bitmap {
+fun Context.getCompressBitmap(resId: Int, targetW: Int? = null, targetH: Int? = null, removeAlpha: Boolean = true): Bitmap {
     val options = BitmapFactory.Options()
     // 只获取图片的宽高，不加载图片到内存中
     options.inJustDecodeBounds = true
-    BitmapFactory.decodeResource(resources, R.mipmap.keqing, options)
+    BitmapFactory.decodeResource(resources, resId, options)
     // 图片原本的宽高
     val width = options.outWidth
     val height = options.outHeight
@@ -36,5 +35,5 @@ fun Context.getCompressBitmap(targetW: Int? = null, targetH: Int? = null, remove
     }
     // 重新加载图片到内存中
     options.inJustDecodeBounds = false
-    return BitmapFactory.decodeResource(resources, R.mipmap.keqing, options)
+    return BitmapFactory.decodeResource(resources, resId, options)
 }

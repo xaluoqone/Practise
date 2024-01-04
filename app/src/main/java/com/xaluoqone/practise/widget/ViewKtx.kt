@@ -1,6 +1,7 @@
 package com.xaluoqone.practise.widget
 
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
@@ -29,6 +30,13 @@ context(ViewGroup)
 fun text(
     scope: MaterialTextView.() -> Unit
 ) = MaterialTextView(context).apply {
+    scope()
+}
+
+context(ViewGroup)
+fun image(
+    scope: ImageView.() -> Unit
+) = ImageView(context).apply {
     scope()
 }
 
