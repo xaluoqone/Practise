@@ -23,4 +23,12 @@ class App : Application() {
             defExceptionHandler?.uncaughtException(t, e)
         }
     }
+
+    fun getSandboxPath(dir: String = "") = instance.getExternalFilesDir(dir)?.apply {
+        if (!exists()) {
+            mkdir()
+        }
+    }
+
+    fun getImageCachePath() = getSandboxPath("image_cache")?.path!!
 }

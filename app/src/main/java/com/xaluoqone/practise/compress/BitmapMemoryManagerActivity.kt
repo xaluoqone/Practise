@@ -1,5 +1,7 @@
 package com.xaluoqone.practise.compress
 
+import android.app.Application
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
@@ -7,10 +9,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.get
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.xaluoqone.practise.App
 import com.xaluoqone.practise.R
 import com.xaluoqone.practise.ex.configSystemBar
 import com.xaluoqone.practise.ex.dpi
@@ -30,7 +33,9 @@ class BitmapMemoryManagerActivity : AppCompatActivity() {
     private val viewModel by viewModels<HeroViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ImageCache.instance.init(this, App.instance.getImageCachePath())
         val content = recycler {
+            clipToPadding = false
             layoutManager = LinearLayoutManager(context).apply {
                 orientation = LinearLayoutManager.VERTICAL
             }
@@ -59,8 +64,8 @@ class BitmapMemoryManagerActivity : AppCompatActivity() {
                 onBindData = { data ->
                     val imageView = this[0] as ImageView
                     val textView = this[1] as TextView
-                    val compressBitmap = context.getCompressBitmap(data.image, 96.dpi, 72.dpi, true)
-                    imageView.setImageBitmap(compressBitmap)
+                    val bitmap = viewModel.loadBitmap(data.image, 96.dpi, 72.dpi)
+                    imageView.setImageBitmap(bitmap)
                     textView.text = data.name
                 }
             )
@@ -81,7 +86,7 @@ class BitmapMemoryManagerActivity : AppCompatActivity() {
     }
 }
 
-class HeroViewModel : ViewModel() {
+class HeroViewModel(application: Application) : AndroidViewModel(application) {
     val uiState = MutableStateFlow(UiState(emptyList()))
 
     fun loadData() {
@@ -122,9 +127,559 @@ class HeroViewModel : ViewModel() {
                 Hero(
                     name = "昭君",
                     image = R.mipmap.zhao_jun
+                ),
+                Hero(
+                    name = "阿离",
+                    image = R.mipmap.a_li
+                ),
+                Hero(
+                    name = "大乔",
+                    image = R.mipmap.da_qiao
+                ),
+                Hero(
+                    name = "火舞",
+                    image = R.mipmap.huo_wu
+                ),
+                Hero(
+                    name = "露露",
+                    image = R.mipmap.lu_lu
+                ),
+                Hero(
+                    name = "露娜",
+                    image = R.mipmap.lu_na
+                ),
+                Hero(
+                    name = "木兰",
+                    image = R.mipmap.mu_lan
+                ),
+                Hero(
+                    name = "西施",
+                    image = R.mipmap.xi_si
+                ),
+                Hero(
+                    name = "小乔",
+                    image = R.mipmap.xiao_qiao
+                ),
+                Hero(
+                    name = "昭君",
+                    image = R.mipmap.zhao_jun
+                ),
+                Hero(
+                    name = "阿离",
+                    image = R.mipmap.a_li
+                ),
+                Hero(
+                    name = "大乔",
+                    image = R.mipmap.da_qiao
+                ),
+                Hero(
+                    name = "火舞",
+                    image = R.mipmap.huo_wu
+                ),
+                Hero(
+                    name = "露露",
+                    image = R.mipmap.lu_lu
+                ),
+                Hero(
+                    name = "露娜",
+                    image = R.mipmap.lu_na
+                ),
+                Hero(
+                    name = "木兰",
+                    image = R.mipmap.mu_lan
+                ),
+                Hero(
+                    name = "西施",
+                    image = R.mipmap.xi_si
+                ),
+                Hero(
+                    name = "小乔",
+                    image = R.mipmap.xiao_qiao
+                ),
+                Hero(
+                    name = "昭君",
+                    image = R.mipmap.zhao_jun
+                ),
+                Hero(
+                    name = "阿离",
+                    image = R.mipmap.a_li
+                ),
+                Hero(
+                    name = "大乔",
+                    image = R.mipmap.da_qiao
+                ),
+                Hero(
+                    name = "火舞",
+                    image = R.mipmap.huo_wu
+                ),
+                Hero(
+                    name = "露露",
+                    image = R.mipmap.lu_lu
+                ),
+                Hero(
+                    name = "露娜",
+                    image = R.mipmap.lu_na
+                ),
+                Hero(
+                    name = "木兰",
+                    image = R.mipmap.mu_lan
+                ),
+                Hero(
+                    name = "西施",
+                    image = R.mipmap.xi_si
+                ),
+                Hero(
+                    name = "小乔",
+                    image = R.mipmap.xiao_qiao
+                ),
+                Hero(
+                    name = "昭君",
+                    image = R.mipmap.zhao_jun
+                ),
+                Hero(
+                    name = "阿离",
+                    image = R.mipmap.a_li
+                ),
+                Hero(
+                    name = "大乔",
+                    image = R.mipmap.da_qiao
+                ),
+                Hero(
+                    name = "火舞",
+                    image = R.mipmap.huo_wu
+                ),
+                Hero(
+                    name = "露露",
+                    image = R.mipmap.lu_lu
+                ),
+                Hero(
+                    name = "露娜",
+                    image = R.mipmap.lu_na
+                ),
+                Hero(
+                    name = "木兰",
+                    image = R.mipmap.mu_lan
+                ),
+                Hero(
+                    name = "西施",
+                    image = R.mipmap.xi_si
+                ),
+                Hero(
+                    name = "小乔",
+                    image = R.mipmap.xiao_qiao
+                ),
+                Hero(
+                    name = "昭君",
+                    image = R.mipmap.zhao_jun
+                ),
+                Hero(
+                    name = "阿离",
+                    image = R.mipmap.a_li
+                ),
+                Hero(
+                    name = "大乔",
+                    image = R.mipmap.da_qiao
+                ),
+                Hero(
+                    name = "火舞",
+                    image = R.mipmap.huo_wu
+                ),
+                Hero(
+                    name = "露露",
+                    image = R.mipmap.lu_lu
+                ),
+                Hero(
+                    name = "露娜",
+                    image = R.mipmap.lu_na
+                ),
+                Hero(
+                    name = "木兰",
+                    image = R.mipmap.mu_lan
+                ),
+                Hero(
+                    name = "西施",
+                    image = R.mipmap.xi_si
+                ),
+                Hero(
+                    name = "小乔",
+                    image = R.mipmap.xiao_qiao
+                ),
+                Hero(
+                    name = "昭君",
+                    image = R.mipmap.zhao_jun
+                ),
+                Hero(
+                    name = "阿离",
+                    image = R.mipmap.a_li
+                ),
+                Hero(
+                    name = "大乔",
+                    image = R.mipmap.da_qiao
+                ),
+                Hero(
+                    name = "火舞",
+                    image = R.mipmap.huo_wu
+                ),
+                Hero(
+                    name = "露露",
+                    image = R.mipmap.lu_lu
+                ),
+                Hero(
+                    name = "露娜",
+                    image = R.mipmap.lu_na
+                ),
+                Hero(
+                    name = "木兰",
+                    image = R.mipmap.mu_lan
+                ),
+                Hero(
+                    name = "西施",
+                    image = R.mipmap.xi_si
+                ),
+                Hero(
+                    name = "小乔",
+                    image = R.mipmap.xiao_qiao
+                ),
+                Hero(
+                    name = "昭君",
+                    image = R.mipmap.zhao_jun
+                ),
+                Hero(
+                    name = "阿离",
+                    image = R.mipmap.a_li
+                ),
+                Hero(
+                    name = "大乔",
+                    image = R.mipmap.da_qiao
+                ),
+                Hero(
+                    name = "火舞",
+                    image = R.mipmap.huo_wu
+                ),
+                Hero(
+                    name = "露露",
+                    image = R.mipmap.lu_lu
+                ),
+                Hero(
+                    name = "露娜",
+                    image = R.mipmap.lu_na
+                ),
+                Hero(
+                    name = "木兰",
+                    image = R.mipmap.mu_lan
+                ),
+                Hero(
+                    name = "西施",
+                    image = R.mipmap.xi_si
+                ),
+                Hero(
+                    name = "小乔",
+                    image = R.mipmap.xiao_qiao
+                ),
+                Hero(
+                    name = "昭君",
+                    image = R.mipmap.zhao_jun
+                ),
+                Hero(
+                    name = "阿离",
+                    image = R.mipmap.a_li
+                ),
+                Hero(
+                    name = "大乔",
+                    image = R.mipmap.da_qiao
+                ),
+                Hero(
+                    name = "火舞",
+                    image = R.mipmap.huo_wu
+                ),
+                Hero(
+                    name = "露露",
+                    image = R.mipmap.lu_lu
+                ),
+                Hero(
+                    name = "露娜",
+                    image = R.mipmap.lu_na
+                ),
+                Hero(
+                    name = "木兰",
+                    image = R.mipmap.mu_lan
+                ),
+                Hero(
+                    name = "西施",
+                    image = R.mipmap.xi_si
+                ),
+                Hero(
+                    name = "小乔",
+                    image = R.mipmap.xiao_qiao
+                ),
+                Hero(
+                    name = "昭君",
+                    image = R.mipmap.zhao_jun
+                ),
+                Hero(
+                    name = "阿离",
+                    image = R.mipmap.a_li
+                ),
+                Hero(
+                    name = "大乔",
+                    image = R.mipmap.da_qiao
+                ),
+                Hero(
+                    name = "火舞",
+                    image = R.mipmap.huo_wu
+                ),
+                Hero(
+                    name = "露露",
+                    image = R.mipmap.lu_lu
+                ),
+                Hero(
+                    name = "露娜",
+                    image = R.mipmap.lu_na
+                ),
+                Hero(
+                    name = "木兰",
+                    image = R.mipmap.mu_lan
+                ),
+                Hero(
+                    name = "西施",
+                    image = R.mipmap.xi_si
+                ),
+                Hero(
+                    name = "小乔",
+                    image = R.mipmap.xiao_qiao
+                ),
+                Hero(
+                    name = "昭君",
+                    image = R.mipmap.zhao_jun
+                ),
+                Hero(
+                    name = "阿离",
+                    image = R.mipmap.a_li
+                ),
+                Hero(
+                    name = "大乔",
+                    image = R.mipmap.da_qiao
+                ),
+                Hero(
+                    name = "火舞",
+                    image = R.mipmap.huo_wu
+                ),
+                Hero(
+                    name = "露露",
+                    image = R.mipmap.lu_lu
+                ),
+                Hero(
+                    name = "露娜",
+                    image = R.mipmap.lu_na
+                ),
+                Hero(
+                    name = "木兰",
+                    image = R.mipmap.mu_lan
+                ),
+                Hero(
+                    name = "西施",
+                    image = R.mipmap.xi_si
+                ),
+                Hero(
+                    name = "小乔",
+                    image = R.mipmap.xiao_qiao
+                ),
+                Hero(
+                    name = "昭君",
+                    image = R.mipmap.zhao_jun
+                ),
+                Hero(
+                    name = "阿离",
+                    image = R.mipmap.a_li
+                ),
+                Hero(
+                    name = "大乔",
+                    image = R.mipmap.da_qiao
+                ),
+                Hero(
+                    name = "火舞",
+                    image = R.mipmap.huo_wu
+                ),
+                Hero(
+                    name = "露露",
+                    image = R.mipmap.lu_lu
+                ),
+                Hero(
+                    name = "露娜",
+                    image = R.mipmap.lu_na
+                ),
+                Hero(
+                    name = "木兰",
+                    image = R.mipmap.mu_lan
+                ),
+                Hero(
+                    name = "西施",
+                    image = R.mipmap.xi_si
+                ),
+                Hero(
+                    name = "小乔",
+                    image = R.mipmap.xiao_qiao
+                ),
+                Hero(
+                    name = "昭君",
+                    image = R.mipmap.zhao_jun
+                ),
+                Hero(
+                    name = "阿离",
+                    image = R.mipmap.a_li
+                ),
+                Hero(
+                    name = "大乔",
+                    image = R.mipmap.da_qiao
+                ),
+                Hero(
+                    name = "火舞",
+                    image = R.mipmap.huo_wu
+                ),
+                Hero(
+                    name = "露露",
+                    image = R.mipmap.lu_lu
+                ),
+                Hero(
+                    name = "露娜",
+                    image = R.mipmap.lu_na
+                ),
+                Hero(
+                    name = "木兰",
+                    image = R.mipmap.mu_lan
+                ),
+                Hero(
+                    name = "西施",
+                    image = R.mipmap.xi_si
+                ),
+                Hero(
+                    name = "小乔",
+                    image = R.mipmap.xiao_qiao
+                ),
+                Hero(
+                    name = "昭君",
+                    image = R.mipmap.zhao_jun
+                ),
+                Hero(
+                    name = "阿离",
+                    image = R.mipmap.a_li
+                ),
+                Hero(
+                    name = "大乔",
+                    image = R.mipmap.da_qiao
+                ),
+                Hero(
+                    name = "火舞",
+                    image = R.mipmap.huo_wu
+                ),
+                Hero(
+                    name = "露露",
+                    image = R.mipmap.lu_lu
+                ),
+                Hero(
+                    name = "露娜",
+                    image = R.mipmap.lu_na
+                ),
+                Hero(
+                    name = "木兰",
+                    image = R.mipmap.mu_lan
+                ),
+                Hero(
+                    name = "西施",
+                    image = R.mipmap.xi_si
+                ),
+                Hero(
+                    name = "小乔",
+                    image = R.mipmap.xiao_qiao
+                ),
+                Hero(
+                    name = "昭君",
+                    image = R.mipmap.zhao_jun
+                ),
+                Hero(
+                    name = "阿离",
+                    image = R.mipmap.a_li
+                ),
+                Hero(
+                    name = "大乔",
+                    image = R.mipmap.da_qiao
+                ),
+                Hero(
+                    name = "火舞",
+                    image = R.mipmap.huo_wu
+                ),
+                Hero(
+                    name = "露露",
+                    image = R.mipmap.lu_lu
+                ),
+                Hero(
+                    name = "露娜",
+                    image = R.mipmap.lu_na
+                ),
+                Hero(
+                    name = "木兰",
+                    image = R.mipmap.mu_lan
+                ),
+                Hero(
+                    name = "西施",
+                    image = R.mipmap.xi_si
+                ),
+                Hero(
+                    name = "小乔",
+                    image = R.mipmap.xiao_qiao
+                ),
+                Hero(
+                    name = "昭君",
+                    image = R.mipmap.zhao_jun
+                ),
+                Hero(
+                    name = "阿离",
+                    image = R.mipmap.a_li
+                ),
+                Hero(
+                    name = "大乔",
+                    image = R.mipmap.da_qiao
+                ),
+                Hero(
+                    name = "火舞",
+                    image = R.mipmap.huo_wu
+                ),
+                Hero(
+                    name = "露露",
+                    image = R.mipmap.lu_lu
+                ),
+                Hero(
+                    name = "露娜",
+                    image = R.mipmap.lu_na
+                ),
+                Hero(
+                    name = "木兰",
+                    image = R.mipmap.mu_lan
+                ),
+                Hero(
+                    name = "西施",
+                    image = R.mipmap.xi_si
+                ),
+                Hero(
+                    name = "小乔",
+                    image = R.mipmap.xiao_qiao
+                ),
+                Hero(
+                    name = "昭君",
+                    image = R.mipmap.zhao_jun
                 )
             )
         )
+    }
+
+    fun loadBitmap(resId: Int, width: Int, height: Int): Bitmap {
+        val key = resId.toString()
+        var bitmap = ImageCache.instance.getBitmap(key, width, height, 1)
+        if (bitmap == null) {
+            bitmap = getApplication<Application>().getCompressBitmap(resId, width, height, true)
+            ImageCache.instance.putBitmap(key, bitmap)
+        }
+        return bitmap
     }
 
     data class UiState(
