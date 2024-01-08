@@ -18,6 +18,7 @@ import com.xaluoqone.practise.ex.configSystemBar
 import com.xaluoqone.practise.ex.doOnApplyWindowInsets
 import com.xaluoqone.practise.exo.ExoPlayerActivity
 import com.xaluoqone.practise.insets.WindowInsetsActivity
+import com.xaluoqone.practise.large.LargeImageActivity
 import com.xaluoqone.practise.proxy.ProxyActivity
 import com.xaluoqone.practise.recycler.RecyclerActivity
 import com.xaluoqone.practise.widget.button
@@ -83,6 +84,9 @@ class MainActivity : AppCompatActivity() {
                 })
                 addView(button(getString(R.string.bitmap_memory_manage)) {
                     startActivity(Intent(this@MainActivity, BitmapMemoryManagerActivity::class.java))
+                })
+                addView(button(getString(R.string.large_image)) {
+                    startActivity(Intent(this@MainActivity, LargeImageActivity::class.java))
                 })
             }
         )
