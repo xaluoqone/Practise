@@ -55,5 +55,8 @@
         <activity
             android:name="com.xaluoqone.practise.large.LargeImageActivity"
             android:exported="true" />
+        <activity
+            android:name="com.xaluoqone.practise.compose.ComposeActivity"
+            android:exported="true" />
     </application>
 </manifest>

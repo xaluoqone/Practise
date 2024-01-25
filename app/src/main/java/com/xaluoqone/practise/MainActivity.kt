@@ -8,6 +8,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
 import com.xaluoqone.practise.biorhythm.BiorhythmActivity
+import com.xaluoqone.practise.compose.ComposeActivity
 import com.xaluoqone.practise.compress.BitmapMemoryManagerActivity
 import com.xaluoqone.practise.compress.CompressActivity
 import com.xaluoqone.practise.data.DataStoreActivity
@@ -87,6 +88,9 @@ class MainActivity : AppCompatActivity() {
                 })
                 addView(button(getString(R.string.large_image)) {
                     startActivity(Intent(this@MainActivity, LargeImageActivity::class.java))
+                })
+                addView(button(getString(R.string.compose)) {
+                    startActivity(Intent(this@MainActivity, ComposeActivity::class.java))
                 })
             }
         )
