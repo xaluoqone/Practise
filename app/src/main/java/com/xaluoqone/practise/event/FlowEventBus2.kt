@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
 import android.os.Bundle
 import android.util.ArrayMap
 import kotlinx.coroutines.channels.awaitClose
@@ -102,7 +103,11 @@ fun Context.broadcastFlow(key: String) = callbackFlow {
         }
     }
 
-    registerReceiver(broadcast, IntentFilter(key))
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        registerReceiver(broadcast, IntentFilter(key), Context.RECEIVER_EXPORTED)
+    } else {
+        registerReceiver(broadcast, IntentFilter(key))
+    }
 
     awaitClose {
         unregisterReceiver(broadcast)
